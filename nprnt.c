@@ -1,3 +1,25 @@
+/********************************************************
+# Copyright (C) 2014, 2015 __MIS 111408005__
+# The Application __ TOWER OF HANOI PUZZLE__.
+#
+# __TOWER OF HANOI PUZZLE__ is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# __TOWER OF HANOI PUZZLE__ is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+********************************************************/
+
+/********************************************************
+		TOWER OF HANOI PUZZLE
+	    	(With Solutions)
+
+********************************************************/
+
 #include"nprnt.h"
 
 /* solves the puzzzle and 
