@@ -2,7 +2,7 @@
 #include "TOH2.h"
 #include"nprnt.h"
 #include <curses.h>
-char *welcome_string = "Enter the number of discs you want to be solved: ";
+char *welcome_string = "Enter the number of discs you want to be solved : ";
 int main (void)
 {       int peg_A[8];   
         int peg_B[8];   
@@ -94,6 +94,7 @@ int main (void)
 					endwin();		/* End curses mode		  */
 					break;
 			case 3:
+					printf("\nExiting");
 				break;
 
 			
@@ -103,8 +104,8 @@ int main (void)
 		}
                 move_disk(disks, choice_from, choice_to, index_from,peg_A, peg_B, peg_C);
                 print_status(disks, peg_A, peg_B, peg_C); }
-        if(peg_C[disks-1]==3)
-                printf("Congratulations! You won!\n");
+        	if(peg_C[disks-1]==3)
+                	printf("Congratulations! You won!\n");
 	
         return 0; }
  
