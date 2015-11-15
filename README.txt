@@ -3,13 +3,12 @@ TOWER OF HANOI PUZZLE AND SOLUTION
 NAME : Krishna Krantikar Baile
 MIS : 111408006
 
-Description of the work done in around 100 words.
 
 	The Application- Tower of hanoi is an interactive puzzle.
 It runs in the terminal only and prints as well as displays the solution 
 when the user Quits. It requires the user to enter the  number of disks required.
-
-
+and then the name of the tower 'to which' and 'from which' disk is to be moved is
+supposed to be entered.
 
 
 Files ->
