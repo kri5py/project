@@ -47,7 +47,7 @@ void print_status(int disks, int peg_A[8], int peg_B[8], int peg_C[8])
                         printf("*");
                 printf("\n");}
         for(i=1; i<=(disks*2 + 7)*3; i++)
-                printf("*");
+                printf("#");
         printf("\n");
         for(i=1; i<=disks+3; i++)
                 printf(" ");
@@ -62,7 +62,8 @@ void print_status(int disks, int peg_A[8], int peg_B[8], int peg_C[8])
 
 void print_no_disk(char *choice_from)
 {       printf("There's no disk!\nChoose a peg with disk(s).\nMove a disk\nfrom what peg?: ");
-        scanf("%s", choice_from); }
+        scanf("%s", choice_from); 
+}
 
 
 int validate_move_from(char *choice_from, int peg_A[8], int peg_B[8], int peg_C[8])
@@ -87,11 +88,11 @@ int validate_move_from(char *choice_from, int peg_A[8], int peg_B[8], int peg_C[
                         print_no_disk(choice_from);
                 while(peg_C[0] == 1 && (*choice_from == 'C' || *choice_from =='c'))
                         print_no_disk(choice_from); }
-        return 0;}
+        return 0;
+}
 
 
-int validate_move_to(int disks, char choice_from, char *choice_to, int
-*index_from, int peg_A[8], int peg_B[8], int peg_C[8])
+int validate_move_to(int disks, char choice_from, char *choice_to, int *index_from, int peg_A[8], int peg_B[8], int peg_C[8])
 {       int i;
         int top_of_stack_from,        /* disk to be removed*/
         top_of_stack_to;              /*smallest */
@@ -103,7 +104,8 @@ int validate_move_to(int disks, char choice_from, char *choice_to, int
                 else if ((choice_from=='B' || choice_from=='b') && peg_B[i]!=1)
                 {       top_of_stack_from = peg_B[i];
                         *index_from=i;
-                        break; }
+                        break; 
+		}
                 else if ((choice_from=='C' || choice_from=='c') && peg_C[i]!=1)
                 {       top_of_stack_from = peg_C[i];
                         *index_from=i;
@@ -136,9 +138,7 @@ peg_C); }
         return 0; }
 
 
-void disk_on_top(int disks, int *top_of_stack_to, char choice_to, int
-peg_A[8],
-int peg_B[8], int peg_C[8])
+void disk_on_top(int disks, int *top_of_stack_to, char choice_to, int peg_A[8],int peg_B[8], int peg_C[8])
 {       int i;
         for (i=disks-1; i>=0; i--)
         {        if ((choice_to=='A' || choice_to=='a') && peg_A[i]!=1)
@@ -147,9 +147,11 @@ int peg_B[8], int peg_C[8])
 		}
                 else if ((choice_to=='B' || choice_to=='b') && peg_B[i]!=1)
                 {        *top_of_stack_to = peg_B[i];
-                        break; }
+                        break; 
+		}
                 else if ((choice_to=='C' || choice_to=='c') && peg_C[i]!=1)
-                {        *top_of_stack_to = peg_C[i];
+                {        
+			*top_of_stack_to = peg_C[i];
                         break; }
                 else     *top_of_stack_to=17; }}
 
@@ -195,5 +197,6 @@ index_from, int peg_A[8], int peg_B[8], int peg_C[8])
         {       temp = peg_B[index_to];
                 peg_B[index_to] = peg_C[index_from];
                 peg_C[index_from] = temp;
- }}
-
+ }
+}
+	
