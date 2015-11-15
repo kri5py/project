@@ -1,8 +1,11 @@
 #include"nprnt.h"
 
+/* solves the puzzzle and 
+*prints it using showpegs
+*/
+void solve_hanoi(peg *p_my_pegs, int n_discs, int src, int aux, int dst) {	
 
-void solve_hanoi(peg *p_my_pegs, int n_discs, int src, int aux, int dst)
-{	if(n_discs == 0)
+	if(n_discs == 0)
 		return;
 	solve_hanoi(p_my_pegs, n_discs - 1, src, dst, aux);
 	move_disc(p_my_pegs, store_n_discs, src, dst);
@@ -11,8 +14,9 @@ void solve_hanoi(peg *p_my_pegs, int n_discs, int src, int aux, int dst)
 	solve_hanoi(p_my_pegs, n_discs - 1, aux, src, dst);
 }
 
-void check_usr_response(peg *p_my_pegs, int n_discs)
-{	int ch;
+/* checks user response to halt the execution of the code inbetween */
+void check_usr_response(peg *p_my_pegs, int n_discs) {	
+	int ch;
 
 	ch = getch(); /* Waits for TIME_OUT milliseconds */
 	if(ch == ERR)
@@ -25,26 +29,33 @@ void check_usr_response(peg *p_my_pegs, int n_discs)
 		}
 }
 
-void move_disc(peg *p_my_pegs, int n_discs, int src, int dst)
-{	int temp, index;
-
+/* moves disc 
+ */
+void move_disc(peg *p_my_pegs, int n_discs, int src, int dst) {	
+	int temp, index;
 	--p_my_pegs[src].n_discs;
 	index = 0;
+
 	while(p_my_pegs[src].sizes[index] == 0 && index != n_discs)
 		++index;
+
 	temp = p_my_pegs[src].sizes[index];
 	p_my_pegs[src].sizes[index] = 0;
-	
 	index = 0;
+
 	while(p_my_pegs[dst].sizes[index] == 0 && index != n_discs)
 		++index;
+
 	--index;
 	p_my_pegs[dst].sizes[index] = temp;
 	++p_my_pegs[dst].n_discs;
 }	
 
-void init_pegs(peg *p_my_pegs, int n_discs)
-{	int size, temp, i;
+/* Allocates arrays 
+* with atmost n-disks
+*/
+void init_pegs(peg *p_my_pegs, int n_discs){
+	int size, temp, i;
 
 	p_my_pegs[0].n_discs = n_discs;
 	
@@ -68,8 +79,13 @@ void init_pegs(peg *p_my_pegs, int n_discs)
 	p_my_pegs[2].bottomy = POSY + 2 + n_discs;
 }	    
 
-void show_pegs(WINDOW *win, peg *p_my_pegs, int n_discs)
-{	int i, j, k, x, y, size;
+/* redraws pegs on the screen
+* with minimum size 3x * 
+*/
+void show_pegs(WINDOW *win, peg *p_my_pegs, int n_discs){
+	int i, j;
+	int k, x;
+	int y, size;
 	
 	wclear(win);
 	attron(A_REVERSE);
@@ -80,12 +96,15 @@ void show_pegs(WINDOW *win, peg *p_my_pegs, int n_discs)
 					p_my_pegs[i].bottomx, "%c", PEG_CHAR);
 	y = p_my_pegs[0].bottomy - n_discs;
 	for(i = 0; i < 3; ++i)	/* For each peg */
-	{	for(j = 0; j < n_discs; ++ j)	/* For each row */
-		{	if(p_my_pegs[i].sizes[j] != 0)
-			{	size = p_my_pegs[i].sizes[j];
+	{	
+		for(j = 0; j < n_discs; ++ j)	/* For each row */
+		{	
+			if(p_my_pegs[i].sizes[j] != 0)
+			{	
+				size = p_my_pegs[i].sizes[j];
 				x = p_my_pegs[i].bottomx - (size / 2);
-				for(k = 0; k < size; ++k)
-					mvwprintw(win, y, x + k, "%c", DISC_CHAR);
+					for(k = 0; k < size; ++k)
+						mvwprintw(win, y, x + k, "%c", DISC_CHAR);
 			}
 			else	
 				mvwprintw(win, y, p_my_pegs[i].bottomx, "%c", PEG_CHAR);
@@ -96,30 +115,32 @@ void show_pegs(WINDOW *win, peg *p_my_pegs, int n_discs)
 	wrefresh(win);
 }
 
-void free_pegs(peg *p_my_pegs, int n_discs)
-{	int i;
+/* deallocates the arrays
+*/
+void free_pegs(peg *p_my_pegs, int n_discs){
+	int i;
 
 	for(i = 0;i < n_discs; ++i)
     		free(p_my_pegs[i].sizes);
 }
 
-/* -------------------------------------------------------------*
- * startx = 0 means at present x 				*
- * starty = 0 means at present y				*
- * win = NULL means take stdscr 				*
- * -------------------------------------------------------------*/
-
-void print_in_middle(int startx, int starty, int width, char *string, WINDOW *win)
-{	int length, x, y;
+/* prints the solution in approx middle of the screen
+*/
+void print_in_middle(int startx, int starty, int width, char *string, WINDOW *win){
+	int length, x, y;
 	float temp;
 
 	if(win == NULL)
 		win = stdscr;
+
 	getyx(win, y, x);
+
 	if(startx != 0)
 		x = startx;
+
 	if(starty != 0)
 		y = starty;
+
 	if(width == 0)
 		width = 80;
 

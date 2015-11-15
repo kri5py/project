@@ -21,7 +21,8 @@ int main (void)
         initialize(disks, peg_A, peg_B, peg_C);
         print_status(disks, peg_A, peg_B, peg_C);
         while (peg_C[disks-1]!=3)
-        {       validate_move_from(&choice_from, peg_A, peg_B, peg_C);
+        {       
+		validate_move_from(&choice_from, peg_A, peg_B, peg_C);
                 if(choice_from=='Q' || choice_from=='q')
                        {
 			printf("1.print sol'n\n");
@@ -70,34 +71,33 @@ int main (void)
 			printf("3.Exit\n");
 			scanf("%d",&choice);
 			switch(choice) {
-			case 1:
-				printsoln(disks);   
-				break;
-			case 2:
-					initscr();	/* Start curses mode 		*/
-					cbreak();	/* Line buffering disabled. Pass on every thing */
-					keypad(stdscr, TRUE);
-					curs_set(FALSE);
-	
-					print_in_middle(0, LINES / 2, COLS, welcome_string, NULL);
-					scanw("%d", &n_discs);	
-
-					timeout(TIME_OUT);
-					noecho();
-					store_n_discs = n_discs;
-
-					init_pegs(my_pegs, n_discs);
-					show_pegs(stdscr, my_pegs, n_discs);
-					solve_hanoi(my_pegs, n_discs, 0, 1, 2);
-
-					free_pegs(my_pegs, n_discs);
-					endwin();		/* End curses mode		  */
+				case 1:
+					printsoln(disks);   
 					break;
-			case 3:
+				case 2:
+						initscr();	/* Start curses mode 		*/
+						cbreak();	/* Line buffering disabled. Pass on every thing */
+						keypad(stdscr, TRUE);
+						curs_set(FALSE);
+		
+						print_in_middle(0, LINES / 2, COLS, welcome_string, NULL);
+						scanw("%d", &n_discs);	
+	
+						timeout(TIME_OUT);
+						noecho();
+						store_n_discs = n_discs;
+	
+						init_pegs(my_pegs, n_discs);
+						show_pegs(stdscr, my_pegs, n_discs);
+						solve_hanoi(my_pegs, n_discs, 0, 1, 2);
+	
+						free_pegs(my_pegs, n_discs);
+						endwin();		/* End curses mode		  */
+					break;
+				case 3:
 					printf("\nExiting");
-				break;
+					break;
 
-			
 			}
 			break;
 		
@@ -107,5 +107,6 @@ int main (void)
         	if(peg_C[disks-1]==3)
                 	printf("Congratulations! You won!\n");
 	
-        return 0; }
+        return 0; 
+}
  
